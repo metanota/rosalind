@@ -102,6 +102,15 @@ executable Subs
   GHC-Options:         -O2 -Wall
   default-language:    Haskell2010
 
+executable Cons
+  hs-source-dirs:      cons
+  main-is:             Main.hs
+  build-depends:
+    base >=4.7 && <4.8
+    , rosalind
+  GHC-Options:         -O2 -Wall
+  default-language:    Haskell2010
+
 executable Perm
   hs-source-dirs:      perm
   main-is:             Main.hs
