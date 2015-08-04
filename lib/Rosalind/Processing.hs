@@ -6,8 +6,8 @@ module Rosalind.Processing
 , mass
 ) where
 
+import Data.List         (dropWhileEnd)
 import Data.List.Split   (chunksOf)
-import Data.Maybe        (fromJust)
 import Data.String.Utils (replace)
 
 import Rosalind.Types
@@ -91,7 +91,7 @@ prot "GGA" = Just 'G'
 prot "GGG" = Just 'G'
 
 rnaToProtein :: Rna -> Protein
-rnaToProtein (Rna rna) = Protein $ (map (fromJust) . takeWhile (/= Nothing) . map prot . chunksOf 3) rna
+rnaToProtein (Rna rna) = Protein $ (map prot . dropWhileEnd (\x -> length x < 3) . chunksOf 3) rna
 
 dnaToProtein :: Dna -> Protein
 dnaToProtein = rnaToProtein . dnaToRna
@@ -119,4 +119,4 @@ prtm 'W' = 186.07931
 prtm 'Y' = 163.06333 
 
 mass :: Protein -> Double
-mass (Protein p) = sum $ map prtm p
+mass = sum . map prtm . show

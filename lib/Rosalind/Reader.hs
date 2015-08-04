@@ -18,7 +18,7 @@ readRna :: FilePath -> IO Rna
 readRna path = readFile path >>= return . Rna . head . lines
 
 readProtein :: FilePath -> IO Protein
-readProtein path = readFile path >>= return . Protein . head . lines
+readProtein path = readFile path >>= return . Protein . map Just . head . lines
 
 readDnas :: FilePath -> IO ([Dna])
 readDnas path = readFile path >>= return . map Dna . lines
