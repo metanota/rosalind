@@ -7,7 +7,7 @@ import Rosalind.Types
 
 openReadingFrames :: Protein -> [Orf]
 openReadingFrames (Protein p) = map (Orf . map fromJust)
-    $ map (\i -> takeWhile (/= Nothing) $ drop i p)
+    $ map (takeWhile (/= Nothing) . flip drop p)
     $ findIndices (== Just 'M')
     $ reverse $ dropWhile (/= Nothing) $ reverse p
 
